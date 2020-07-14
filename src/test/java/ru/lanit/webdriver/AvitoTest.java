@@ -26,8 +26,6 @@ public class AvitoTest {
         driverWait = new WebDriverWait(webDriver, 5);
         webDriver.get("https://www.avito.ru/");
         webDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-//        webDriver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
-//        webDriver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
     @Test
@@ -44,7 +42,8 @@ public class AvitoTest {
         driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@data-marker='popup-location/region/input']")));
         webDriver.findElement(By.xpath("//input[@data-marker='popup-location/region/input']"))
                 .sendKeys("Владивосток");
-        //Временное решение
+
+        //Временное решение, список с выбором города всегда открыт, результаты выводятся динамически
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -60,6 +59,7 @@ public class AvitoTest {
         driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@data-marker='delivery-filter']")));
         WebElement elementDelivery = webDriver.findElement(By.xpath("//label[@data-marker='delivery-filter']"));
         if (!elementDelivery.isSelected()) {
+            driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//label[@data-marker='delivery-filter']")));
             elementDelivery.click();
         }
 
@@ -69,13 +69,12 @@ public class AvitoTest {
         driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//option[text()='Дороже']")));
         webDriver.findElement(By.xpath("//option[text()='Дороже']")).click();
 
-        List<WebElement> title = webDriver.findElements(By.xpath("//div[@class='snippet-title-row']"));
-        List<WebElement> price = webDriver.findElements(By.xpath("//div[@class='snippet-price-row']"));
+        List<WebElement> printers = webDriver.findElements(By.xpath("//div[@class='item_table-wrapper']"));
 
         for (int i = 0; i < 3; i++) {
             System.out.println("Принтер №" + (i + 1));
-            System.out.println(title.get(i).findElement(By.xpath("./h3/a")).getText());
-            System.out.println(price.get(i).findElement(By.xpath("./span[@class='snippet-price ']")).getText());
+            System.out.println(printers.get(i).findElement(By.xpath("./div/div[@class='snippet-title-row']/h3/a")).getText());
+            System.out.println(printers.get(i).findElement(By.xpath("./div/div[@class='snippet-price-row']/span[@class='snippet-price ']")).getText());
             System.out.println("-------------------------");
         }
     }
