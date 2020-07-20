@@ -1,4 +1,4 @@
-package ru.lanit.webdriver.Params;
+package ru.lanit.webdriver.params;
 
 public enum Category {
     оргтехника("Оргтехника и расходники", 99),

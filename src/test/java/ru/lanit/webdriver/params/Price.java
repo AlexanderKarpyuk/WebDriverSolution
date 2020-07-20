@@ -1,4 +1,4 @@
-package ru.lanit.webdriver.Params;
+package ru.lanit.webdriver.params;
 
 public enum Price {
     Дороже("Дороже",2),

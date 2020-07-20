@@ -8,8 +8,8 @@ import io.cucumber.java.ru.Тогда;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import ru.lanit.webdriver.Params.Category;
-import ru.lanit.webdriver.Params.Price;
+import ru.lanit.webdriver.params.Category;
+import ru.lanit.webdriver.params.Price;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
