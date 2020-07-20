@@ -1,6 +1,7 @@
 package ru.lanit.webdriver.steps;
 
 import com.codeborne.selenide.ElementsCollection;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Пусть;
@@ -11,6 +12,8 @@ import org.testng.Assert;
 import ru.lanit.webdriver.params.Category;
 import ru.lanit.webdriver.params.Price;
 
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,12 +52,10 @@ public class Steps {
 
     /**
      * Заполнение поля поиска.
-     * @param arg - строка.
      */
-    @И("в поле поиска введено значение принтер {string}")
+    @И("в поле поиска введено значение {string}")
     public void typeSearch(String arg) {
         $(By.xpath("//input[@id='search']")).sendKeys(arg);
-
     }
 
     /**
@@ -112,7 +113,8 @@ public class Steps {
         if (!elementFilter.isSelected()) {
             $(By.xpath("//div[@class='filters-root-3Q1ZY']/label[starts-with(@class,'checkbox')]/span")).click();
         }
-        $(By.xpath("//button[@data-marker='search-filters/submit-button']")).click();
+
+        $(By.xpath("//button[@data-marker='search-form/submit-button']")).click();
     }
 
     /**
@@ -133,7 +135,7 @@ public class Steps {
         ElementsCollection printers = $$(By.xpath("//div[@class='item_table-wrapper']"));
 
         for (int i = 0; i < arg; i++) {
-            System.out.println("Принтер №" + (i + 1));
+            System.out.println("Товар №" + (i + 1));
             System.out.println(printers.get(i).$(By.xpath("./div/div[@class='snippet-title-row']/h3/a")).getText());
             System.out.println(printers.get(i).$(By.xpath("./div/div[@class='snippet-price-row']/span[@class='snippet-price ']")).getText());
             System.out.println("-------------------------");
